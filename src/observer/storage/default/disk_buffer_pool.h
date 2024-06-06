@@ -56,7 +56,7 @@ public:
   Page *hdr_page;
   char *bitmap;
   BPFileSubHeader *file_sub_header;
-} ;
+};
 
 class BPManager {
 public:

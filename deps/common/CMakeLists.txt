@@ -1,9 +1,15 @@
-project(common)
+
+PROJECT(common)
 MESSAGE("Begin to build " ${PROJECT_NAME})
 MESSAGE(STATUS "This is PROJECT_BINARY_DIR dir " ${PROJECT_BINARY_DIR})
 MESSAGE(STATUS "This is PROJECT_SOURCE_DIR dir " ${PROJECT_SOURCE_DIR})
 
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/..)
+#find_file() 只会找一个文件
+#AUX_SOURCE_DIRECTORY(. SRC_LIST)
+#FOREACH(F ${SRC_LIST})
+#    MESSAGE(${F})
+#ENDFOREACH(F)
 
 FILE(GLOB_RECURSE ALL_SRC  *.cpp)
 FOREACH(F ${ALL_SRC})
@@ -11,19 +17,24 @@ FOREACH(F ${ALL_SRC})
     MESSAGE("Use " ${F})
 ENDFOREACH(F)
 
+
+#SHARED，动态库
+#STATIC，静态库
 ADD_LIBRARY(common SHARED ${ALL_SRC} )
 ADD_LIBRARY(common_static STATIC ${ALL_SRC})
 
-# 没有 SET_TARGET_PROPERTIES，是不能同时 build 静态库和动态库
+# 没有SET_TARGET_PROPERTIES， 是不能同时build 静态库和动态库， 如果只build 一种库， 就不需要这个功能
 SET_TARGET_PROPERTIES(common_static PROPERTIES OUTPUT_NAME "common")
 GET_TARGET_PROPERTY(OUTPUT_VALUE common_static OUTPUT_NAME)
 MESSAGE(STATUS "This is the func_static OUTPUT_NAME:" ${OUTPUT_VALUE})
 
-# 编译静态库时，自动会把同名的动态库给删除
+# 编译静态库时，自动会把同名的动态库给删除， 因此需要临时设置一下
 SET_TARGET_PROPERTIES(common PROPERTIES CLEAN_DIRECT_OUTPUT 1)
 SET_TARGET_PROPERTIES(common_static PROPERTIES CLEAN_DIRECT_OUTPUT 1)
 
-# 设置版本号 VERSION 指代动态库版本，SOVERSION 指代 API 版本
+# 设置版本号 VERSION指代动态库版本，SOVERSION指代API版本
+
+
 SET(MAIJOR_VER 1)
 SET(MINOR_VER  0)
 SET(PATCH_VER  0)

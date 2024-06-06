@@ -1,17 +1,3 @@
-/* Copyright (c) 2021 Xie Meiyi(xiemeiyi@hust.edu.cn) and OceanBase and/or its affiliates. All rights reserved.
-miniob is licensed under Mulan PSL v2.
-You can use this software according to the terms and conditions of the Mulan PSL v2.
-You may obtain a copy of Mulan PSL v2 at:
-         http://license.coscl.org.cn/MulanPSL2
-THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
-EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
-MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
-See the Mulan PSL v2 for more details. */
-
-//
-// Created by Longda on 2021/4/13.
-//
-
 #include <string.h>
 #include <string>
 
@@ -289,14 +275,7 @@ void DefaultStorageStage::callback_event(StageEvent *event,
   return;
 }
 
-/**
- * 从文件中导入数据时使用。尝试向表中插入解析后的一行数据。
- * @param table  要导入的表
- * @param file_values 从文件中读取到的一行数据，使用分隔符拆分后的几个字段值
- * @param record_values Table::insert_record使用的参数，为了防止频繁的申请内存
- * @param errmsg 如果出现错误，通过这个参数返回错误信息
- * @return 成功返回RC::SUCCESS
- */
+// 从文件中导入数据时使用。尝试向表中插入解析后的一行数据。
 RC insert_record_from_file(Table *table, std::vector<std::string> &file_values, 
                 std::vector<Value> &record_values, std::stringstream &errmsg) {
 

@@ -35,7 +35,7 @@ Frame *BPManager::get(int file_desc, PageNum page_num) {
 }
 
 void BPManager::deleteFrame(FileDesc fd, PageNum pn, FrameId frame_id) {
-  //这里pin一次，是为了防止被最后一次unpin之后delete，导致该frame既在lru中，又在free_lis中的严重bug
+  //这里pin一次，是为了防止被最后一次unpin之后delete，导致该frame既在lru中，又在free_list
   replacer_->Pin(frame_id);
   DeletePageTable(fd, pn);
   free_list_.push_back(frame_id);
@@ -60,7 +60,7 @@ DiskBufferPool *theGlobalDiskBufferPool()
   static DiskBufferPool *instance = new DiskBufferPool();
 
   return instance;
-}
+} 
 
 RC DiskBufferPool::create_file(const char *file_name)
 {

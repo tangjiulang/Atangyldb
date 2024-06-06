@@ -51,7 +51,7 @@ char *my_readline(const char *prompt)
     fprintf(stderr, "failed to alloc line buffer");
     return nullptr;
   }
-  fprintf(stdout, prompt);
+  fprintf(stdout, "AtangylDB > ");
   char *s = fgets(buffer, MAX_MEM_BUFFER_SIZE, stdin);
   if (nullptr == s) {
     fprintf(stderr, "failed to read message from console");
@@ -138,7 +138,7 @@ int main(int argc, char *argv[])
     }
   }
 
-  const char *prompt_str = "miniob > ";
+  const char *prompt_str = "AtangylDB > ";
 
   int sockfd, send_bytes;
 

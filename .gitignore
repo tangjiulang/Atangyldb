@@ -6,3 +6,7 @@ deps/jsoncpp
 deps/libevent
 .idea
 compare.txt
+cmake_install.cmake
+CMakeCache.txt
+Makefile
+CMakeFiles
